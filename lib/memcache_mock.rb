@@ -17,6 +17,10 @@ class MemcacheMock
     @values.fetch(key, nil)
   end
 
+  def read( key )
+    get( key )
+  end
+
   def get_multi( *keys )
     keys.flatten!
     @values.select { |k, v| keys.include?( k ) }
@@ -24,6 +28,10 @@ class MemcacheMock
 
   def set( key, value, ttl = nil, options = {} )
     @values[key] = value
+  end
+
+  def write(key, value)
+    set(key, value)
   end
 
   def update( key, default, ttl = nil, options = nil )
